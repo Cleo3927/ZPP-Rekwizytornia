@@ -1,8 +1,8 @@
 import cv2
 
 class Camera():
-    def __init__(self):
-        self.camera = cv2.VideoCapture(2)
+    def __init__(self, port_usb):
+        self.camera = cv2.VideoCapture(port_usb)
         self.photo = 0
         
     def gen_frames(self):  # generate frame by frame from camera

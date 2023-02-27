@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  title: "Integration beetween ML project and Rotation Engine"
+  version: "1.0.0"
+
+#Catalogue 
+servers:
+- url: https://192.168.x.x
+
+description: Engine endpoints
+
+paths:
+  /rotate:
+    get:
+      summary: Rotate object 
+      description: Send request for rotating a photographed object
+      parameters: 
+        - name: angle
+          in: path
+          required: true
+          schema: 
+            type: integer
+            minimum: 0
+            maksimum: 360
+      responses:
+        '200':
+          description: OK

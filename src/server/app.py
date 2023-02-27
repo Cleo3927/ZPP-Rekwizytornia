@@ -12,7 +12,7 @@ import database
 app = Flask(__name__, template_folder="templates")
 
 database = database.Database()
-camera = driver.Camera()
+camera = driver.Camera(0)
 
 def get_template_for_response(result):
     print(result)
@@ -29,12 +29,12 @@ def menu():
 def video_feed():
     return Response(camera.gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route("/add")
+@app.route("/add_element")
 def add_element():
     return render_template("add_element.html")
 
 @app.route("/add_result", methods=["GET", "POST"])
-def add_object_result():
+def add_result():
     name = request.form.get("name")
     count = request.form.get("count")
     price = request.form.get("price")
