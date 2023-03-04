@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	<h1>Panel Admina</h1>
+	<h1>Trenowanie modelu</h1>
+{% endblock %}
+
+{% block content %}
+<div style="width:50%  vertical-align=middle">	
+	<div class="alert alert-danger" role="alert"> Po kliknięciu przycisku trenowanie modelu zostanie wstrzymane. Czy chcesz dokonać tej operacji? </div>
+	<form action="/stop_model_result" method="POST" id="submit"> 
+		<button class="btn btn-light" type="submit" form="submit" value="Submit">Wstrzymaj trening</button> 
+	</form> 
+</div> 
+{% endblock %}

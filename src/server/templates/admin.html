@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	<h1>Admin Panel</h1>
+	<h1>Panel Admina</h1>
 {% endblock %}
 
 {% block content %}
 	<div class="container-fluid text-center"> 
 			<div class="form-group row"> 
-				<a href="/add" class="btn btn-light" role="button" style="width:100%">Add Element</a> 
+				<a href="/add_element" class="btn btn-light" role="button" style="width:100%">Dodaj element</a> 
 			</div> 
 			<div class="form-group row"> 
-				<a href="#" class="btn btn-light" role="button" style="width:100%">Delete Element</a> 
+				<a href="/train_model" class="btn btn-light" role="button" style="width:100%">Wytrenuj model</a> 
 			</div> 
 			<div class="form-group row"> 
-				<a href="#" class="btn btn-light" role="button" style="width:100%">Relearn model</a> 
+				<a href="/stop_model" class="btn btn-light" role="button" style="width:100%">Wstrzymaj naukę</a> 
 			</div> 
 	</div>
 {% endblock %}

@@ -1,24 +1,19 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	<h1>Panel Admin</h1>
-	<h1>Adding an element</h1>
+	<h1>Panel Admina</h1>
+	<h1>Dodawanie elementu do modelu</h1>
 {% endblock %}
 
 {% block content %}
-<div style="width:50%  vertical-align: middle">	
+<div style="width:50%  vertical-align=middle">	
     <img src="{{ url_for('video_feed') }}" height="80%">
 	<form action="/add_result" method="POST" id="submit"> 
-		<div class="row">
-			<input type="text" class="form-control" placeholder="Nazwa przedmiotu" name="name" id="name">
+		<div class="form-group form-check">
+			<input type="checkbox" class="form-check-input" name="add" id="add">
+			<label class="form-check-label" for="add">Dodaj element również do katalogu(bazy danych)</label>
 		</div>
-		<div class="row">
-			<input type="number" class="form-control" placeholder="Ilość przedmiotu" name="count" id="count">
-		</div>
-		<div class="row">
-			<input type="number" class="form-control" placeholder="Cena przedmiotu" name="price" id="price">
-		</div>
-		<button class="btn btn-light" type="submit" form="submit" value="Submit">Submit</button> 
+		<button class="btn btn-light" type="submit" form="submit" value="Submit">Dodaj</button> 
 	</form> 
 </div> 
 {% endblock %}

@@ -15,7 +15,6 @@ database = database.Database()
 camera = driver.Camera(0)
 
 def get_template_for_response(result):
-    print(result)
     if result == "OK":
         return render_template("result_ok.html")
     else:
@@ -35,13 +34,32 @@ def add_element():
 
 @app.route("/add_result", methods=["GET", "POST"])
 def add_result():
-    name = request.form.get("name")
-    count = request.form.get("count")
-    price = request.form.get("price")
+    add_database = request.form.get("add")
     result = "OK"
-    
-    camera.make_photo(name)
+
+    if add_database == "on":
+        print("adding to catalogue")
+
+    camera.make_photo("nazwa")
     number = database.get_index()
+    return get_template_for_response(result)
+
+@app.route("/train_model")
+def train_model():
+    return render_template("train_model.html")
+
+@app.route("/train_model_result", methods=["GET", "POST"])
+def train_model_result():
+    result = "OK"
+    return get_template_for_response(result)
+
+@app.route("/stop_model")
+def stop_model():
+    return render_template("stop_model.html")
+
+@app.route("/stop_model_result", methods=["GET", "POST"])
+def stop_model_result():
+    result = "OK"
     return get_template_for_response(result)
 
 if __name__ == "__main__":
