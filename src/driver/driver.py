@@ -20,9 +20,9 @@ class Camera():
             else:
                 pass
 
-    def make_photo(self, photo_name):
+    def make_photo(self, photo_name, id):
         success, frame = self.camera.read() 
-        cv2.imwrite('../../photos/' + photo_name + '.jpg', frame)
+        cv2.imwrite('../../photos/' + str(id) + '/' + photo_name + '.jpg', frame)
     
     def close_camera(self):
         self.camera.release()
