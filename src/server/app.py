@@ -2,6 +2,8 @@ from flask import Flask, render_template, Response
 from flask import request, redirect
 import cv2
 import sys
+import logging
+import os
 
 sys.path.append("../driver")
 sys.path.append("../")
@@ -12,7 +14,7 @@ from const_values import photo_series, camera_usb_port_front, camera_usb_port_le
 
 app = Flask(__name__, template_folder="templates")
 
-camera = driver.Camera(0)
+cameras = {"front": driver.Camera(0)}
 
 def get_template_for_response(result):
     if result == "OK":
@@ -20,13 +22,16 @@ def get_template_for_response(result):
     else:
         return render_template("result_fail.html")
 
+def get_photo_name(id, type, series):
+    return "#id:" + str(id) + "#type:" + type + "#series:" + str(series)
+
 @app.route("/")
 def menu():
     return render_template("admin.html")
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(camera.gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(cameras["front"].gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/add_element")
 def add_element():
@@ -35,12 +40,22 @@ def add_element():
 @app.route("/add_result", methods=["GET", "POST"])
 def add_result():
     add_database = request.form.get("add")
-    result = "OK"
+
+    # TODO 
+    # id = get_id()
+    id = 0
+    os.mkdir("../../photos/" + str(id))
+
+    for number_series in range(photo_series):
+        for type in cameras:
+            cameras[type].make_photo(get_photo_name(id, type, number_series), id)
+        # get_rotation()
 
     if add_database == "on":
-        print("adding to catalogue")
+        print("Adding element to catalogue")
+        # add_to_catalogue
 
-    camera.make_photo("nazwa")
+    result = "OK"
     return get_template_for_response(result)
 
 @app.route("/train_model")
