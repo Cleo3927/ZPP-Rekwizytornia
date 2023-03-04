@@ -3,15 +3,15 @@ from flask import request, redirect
 import cv2
 import sys
 
-sys.path.append("../database")
 sys.path.append("../driver")
+sys.path.append("../")
+sys.path.append("../../")
 
 import driver
-import database
+from const_values import photo_series, camera_usb_port_front, camera_usb_port_left, camera_usb_port_up 
 
 app = Flask(__name__, template_folder="templates")
 
-database = database.Database()
 camera = driver.Camera(0)
 
 def get_template_for_response(result):
@@ -41,7 +41,6 @@ def add_result():
         print("adding to catalogue")
 
     camera.make_photo("nazwa")
-    number = database.get_index()
     return get_template_for_response(result)
 
 @app.route("/train_model")
