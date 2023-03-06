@@ -1,13 +1,51 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	<h1>Panel Admina</h1>
 	<h1>Dodawanie elementu do modelu</h1>
 {% endblock %}
 
 {% block content %}
-<div style="width:50%  vertical-align=middle">	
-    <img src="{{ url_for('video_feed') }}" height="80%">
+<div style="width:50%  vertical-align=middle">
+	{% if camera == "front" %}	
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" href="/add_element/front">Front</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/add_element/left">Lewa</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/add_element/up">Od góry</a>
+			</li>
+		</ul>
+		<img src="{{ url_for('video_feed_front') }}" height="80%">
+	{% elif camera == "left" %}
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link" href="/add_element/front">Front</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/add_element/left">Lewa</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/add_element/up">Od góry</a>
+			</li>
+		</ul>
+		<img src="{{ url_for('video_feed_left') }}" height="80%">
+	{% elif camera == "up" %}
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link" href="/add_element/front">Front</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/add_element/left">Lewa</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/add_element/up">Od góry</a>
+			</li>
+		</ul>
+		<img src="{{ url_for('video_feed_up') }}" height="80%">
+	{% endif %}
 	<form action="/add_result" method="POST" id="submit"> 
 		<div class="form-group form-check">
 			<input type="checkbox" class="form-check-input" name="add" id="add">

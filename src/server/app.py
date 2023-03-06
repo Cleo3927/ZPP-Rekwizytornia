@@ -14,7 +14,7 @@ from const_values import photo_series, camera_usb_port_front, camera_usb_port_le
 
 app = Flask(__name__, template_folder="templates")
 
-cameras = {"front": driver.Camera(0)}
+cameras = {"front": driver.Camera(0), "left": driver.Camera(2)}
 
 def get_template_for_response(result):
     if result == "OK":
@@ -29,13 +29,29 @@ def get_photo_name(id, type, series):
 def menu():
     return render_template("admin.html")
 
-@app.route('/video_feed')
-def video_feed():
+@app.route('/video_feed_front')
+def video_feed_front():
     return Response(cameras["front"].gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route("/add_element")
-def add_element():
-    return render_template("add_element.html")
+@app.route('/video_feed_left')
+def video_feed_left():
+    return Response(cameras["left"].gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/video_feed_up')
+def video_feed_up():
+    return Response(cameras["front"].gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route("/add_element/front")
+def add_element_front():
+    return render_template("add_element.html", camera="front")
+
+@app.route("/add_element/left")
+def add_element_left():
+    return render_template("add_element.html", camera="left")
+
+@app.route("/add_element/up")
+def add_element_up():
+    return render_template("add_element.html", camera="up")
 
 @app.route("/add_result", methods=["GET", "POST"])
 def add_result():
